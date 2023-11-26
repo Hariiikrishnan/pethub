@@ -1,0 +1,12 @@
+/* red - rgb(255, 53, 63) */
+
+
+*{
+    margin:0;
+    padding: 0;
+}
+
+.account{
+    display: flex;
+    
+}

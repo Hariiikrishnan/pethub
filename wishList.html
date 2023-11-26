@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Hub</title>
+    <title>Wishlist</title>
 
     <link rel="stylesheet" href="styles/globalStyle.css">
 
+     <!-- Goolge Icons -->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <!-- Goolge Icons -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <!-- Font Awesome Icons -->
+      <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png" sizes="32x32" />
-<link rel="icon" type="image/png" href="favicon/favicon-16x16.png" sizes="16x16" />
-
 </head>
-
 <body>
-
-
-
-    <nav>
+    
+    <nav class="colored">
         <h3>PetHub</h3>
         <ul class="navbar">
             <li><a href="index.html">Home</a></li>
             <li><a href="wishList.html">Wishlist</a></li>
-
+           
             <li><a href="account.html">Account</a></li>
             <li><a href="login.html">Login</a></li>
             <li><!-- <a>Home</a> --></li>
@@ -46,71 +36,44 @@
         <div class="sidebar">
             <button onclick="handleSideBar()">
                 &#9776
-            </button>
+              </button>
         </div>
         <div class="sidebarMenu">
             <button onclick="closeSideBar()">X</button>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="wishList.html">Wishlist</a></li>
-
+               
                 <li><a href="account.html">Account</a></li>
-
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html">Register</a></li>
+               
                 <li><!-- <a>Home</a> --></li>
             </ul>
         </div>
     </nav>
+    
 
+    <section>
+     <!-- style="display:flex;flex-direction: column;align-items: center;" -->
+     
 
-    <section class="search">
-        <div>
-            <input class="searchInput" placeholder="Search for a Pet" />
-            <button onclick="handleSearch()">
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-            </button>
+        <h2 style="text-align: center;margin:30px 0">Your Wishlist</h2>
+        <div class="wishlistFeed">
+
         </div>
-        <!-- <input placeholder="Add your pet"/> -->
-        <a href="form.html">Add your Pet</a>
     </section>
-    
-    <h1 class="accountName" style="margin: 10px 0;text-align: center;"></h1>
-    
-    <section class="feed">
-
-
-
-        <!-- 
-        <div class="postContainer">
-           <div class="innerCont">
-            <img src="images/dog1.jpg" alt="Pic"/>
-            <button><span class="material-symbols-outlined">
-                favorite
-                </span></button>
-           </div>
-
-           <h3>Pongo</h3>
-           <h4>Rs.4,500</h4>
-           <p>Salem,Tamilnadu</p>
-        </div> -->
-
-    </section>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 
-
+    
     <script src="script.js">
 
     </script>
 
     <script>
-        getAllPost();
-        getAccountName();
+        wishListApi();
     </script>
-</body>
 
+</body>
 </html>

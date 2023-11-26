@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHub</title>
+
+    <link rel="stylesheet" href="styles/globalStyle.css">
+    <link rel="stylesheet" href="styles/form.css">
+
+
+    <!-- Goolge Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+   <!-- Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+   
+</head>
+
+<body>
+
+    
+    <nav class="colored">
+        <h3>PetHub</h3>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="wishList.html">Wishlist</a></li>
+          
+            <li><a href="account.html">Account</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><!-- <a>Home</a> --></li>
+        </ul>
+
+
+        <div class="sidebar">
+            <button onclick="handleSideBar()">
+                &#9776
+              </button>
+        </div>
+        <div class="sidebarMenu">
+            <button onclick="closeSideBar()">X</button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wishList.html">Wishlist</a></li>
+               
+                <li><a href="account.html">Account</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><!-- <a>Home</a> --></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section>
+        <div class="formContainer">
+            <h2>Sell your Pet</h2>
+
+            <form>
+                <div>
+                    <div>
+                        <label>
+                            Pet Name
+                        </label>
+                    </div>
+                    <input class="inputGet" placeholder=""/>
+                </div>
+                <div>
+                    <label>
+                        Holder Name
+                    </label>
+                    <input class="inputGet" placeholder=""/>
+                </div>
+                <div>
+                    <label>
+                        Address
+                    </label>
+                    <input class="inputGet" placeholder=""/>
+                </div>
+                <div>
+                    <label>
+                        Amount
+                    </label>
+                    <input class="inputGet" type="" placeholder=""/>
+                </div>
+                    <div>
+                        <label>
+                            Contact Number
+                        </label>
+                        <input class="inputGet" placeholder=""/>
+                    </div>
+                    <div>
+                        <label>Pet Photo</label>
+                        <input class="inputGet" type="file" placeholder=""/>
+                    </div>
+                
+                </form>
+                <button onclick="handlePost()" class="formBtn">Add</button>
+        </div>
+    </section>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

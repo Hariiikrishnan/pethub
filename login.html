@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PetHub</title>
+
+    <link rel="stylesheet" href="styles/login.css" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <section class="loginForm">
+        <h1>PetHub</h1>
+        <div class="container">
+            <p>Better place to look for a pet !</p>
+            <div>
+                <div>
+                    <label>Username</label>
+                    <input name="username" class="loginInput" placeholder="" autocomplete="off" />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input name="password" class="loginInput" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <a href="register.html">Don't have an Account ?</a>
+            <button class="loginBtn" onclick="handleLogin()">Login</button>
+        </div>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+
+    <script src="script.js">
+
+    </script>
+
+</body>
+
+</html>

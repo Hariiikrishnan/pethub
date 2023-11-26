@@ -1,73 +1,141 @@
-
 /* red - rgb(255, 53, 63) */
 
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
+    font-family: 'Playfair Display', serif;
+}
+a{
+    text-decoration: none;
 }
 
-nav{
+nav {
     display: flex;
     width: 100%;
     justify-content: space-around;
     margin: 25px 0;
+    align-items: center;
 }
 
-nav ul{
+nav ul {
     display: flex;
     width: 30%;
-    
+
     /* justify-content: space-around; */
 }
-nav h3{
-    /* margin: 10px; */
+
+nav h3 {
+    font-size: 20px;
 }
-nav ul li{
+
+nav ul li {
     /* margin: 10px; */
     list-style: none;
     margin: 0 20px;
 }
 
-nav ul li a{
+nav ul li a {
     text-decoration: none;
     color: black;
 }
 
+.sidebar,
+.sidebarMenu {
+    display: none;
+    transform: translateX(100%);
+}
 
 
-.search{
+
+.search {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 15px 0;
 }
 
-.search input{
-    border-radius: 12px;
-    border: solid  black 2px;
+
+
+.search input {
+    /* border-radius: 12px; */
+    border: none;
     padding: 10px 15px;
-    width: 250px;
+    width: 200px;
+    margin: 5px;
+}
+.search a{
+    width: 200px;
+    margin:5px;
+    text-align: center;
+
+    padding: 10px 15px;
+    color: white;
+    border-radius: 12px;
+    background-color: rgb(255, 53, 63);
+    border: solid rgb(223, 173, 156) 2px;
 }
 
-.search input::placeholder{
+.search input:nth-child(2)::placeholder {
+    color: white;
+}
+
+.search input:focus {
+    /* transform: scale(1.07); */
+    /* transition: transform 0.1s ease-in-out; */
+    outline:none;
+}
+
+
+.search input:nth-child(2):focus {
+
+    outline: 0px;
+    /* border: solid rgb(223, 173, 156) 3px; */
+}
+
+.search input::placeholder {
     color: black;
+    font-size: 16px;
+}
+
+.search div{
+    border: solid black 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search div button{
+    border: none;
+    height: 100%;
+    padding: 0 15px;
+    background-color: red;
+    /* margin: 0 20px; */
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 0 8px 8px 0;
+}
+.search div button:hover{
+    opacity: 0.5;
+    transition: all 0.1s linear;
 }
 
 
 
 
-
-
-.feed{
+.feed ,.wishlistFeed{
     /* padding: 30px; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
 }
-.feed .postContainer{
+
+.feed .postContainer,.wishlistFeed .postContainer {
     height: 230px;
     width: 180px;
-    box-shadow: 0.3px 0.1px 5px #000000;
+    box-shadow: 0.0003px 0.001px 3px #000000;
     /* border: solid black 1px; */
     margin: 5px;
     border-radius: 12px;
@@ -77,54 +145,146 @@ nav ul li a{
     align-items: center;
     justify-content: space-around;
 }
-.feed .postContainer .innerCont {
+
+.feed .postContainer .innerCont , .wishlistFeed .postContainer .innerCont {
     border-radius: 10px;
+    display: flex;
 }
-.feed .postContainer .innerCont img{
-    object-fit: contain;
+
+.feed .postContainer .innerCont img ,.wishlistFeed .postContainer .innerCont img{
+    object-fit: cover;
     height: 150px;
     width: 150px;
     border-radius: 10px 0 0 10px;
 }
-.feed .postContainer .innerCont{
-    display: flex;
-  
-    /* width: 80%; */
-    /* justify-content: space-between; */
-}
-.feed .postContainer .innerCont button{
+
+
+
+.feed .postContainer .innerCont button , .wishlistFeed .postContainer .innerCont button{
     padding: 0 5px 0 5px;
     background-color: white;
     border: none;
     border-radius: 0px 10px 10px 0px;
 }
+.feed .postContainer .innerCont button.wishListed{
+    background-color: red;
+}
+.wishlistFeed .postContainer .innerCont button{
+    background-color: red;
+    color:white;
+}
 .feed .postContainer .innerCont button:hover {
-  background-color: red;
-  color: white;
-  transition: all 0.2s linear;
+    background-color: red;
+    color: white;
+    transition: all 0.2s linear;
+}
+
+nav.colored{
+    background-color:  rgb(255, 53, 63);
+    margin: 0;
+    padding: 25px 0;
+    color: white;
 }
 
 
 
 
-
-
 /* Mobile Sized Media Query */
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) {
 
-    nav ul{
-        width: 60%;
+    nav .navbar {
+        /* width: 60%; */
+        display: none;
     }
 
-    nav ul li{
+    .sidebar {
+        display: inline;
+    }
+
+    .sidebar button {
+        padding: 2px 4px;
+        font-size: 18px;
+        /* color: rgb(255, 53, 63); */
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .sidebar button:hover {
+        color: white;
+        background-color: rgb(236, 87, 87);
+        border-radius: 2px;
+        transition: all 0.1s linear;
+        /* border: solid 2px   rgb(255, 53, 63); */
+    }
+
+    .sidebarMenu.show {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(255, 53, 63);
+        transform: translateX(0%);
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        animation: slideInSideBar 0.3s ease-in;
+    }
+
+    .sidebarMenu.show ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 50%;
+    }
+
+    .sidebarMenu.show ul li a {
+        color: white;
+        font-size: 18px;
+    }
+
+    .sidebarMenu.show button {
+
+        background-color: transparent;
+        font-size: 18px;
+        width: 100%;
+        text-align: end;
+        padding: 30px;
+        border: none;
+        color: white;
+
+    }
+
+    .sidebarMenu button:hover {
+        color: rgb(255, 147, 152);
+    }
+
+
+    nav ul li {
         margin: 0 5px;
     }
-    .feed .postContainer{
-        width: 150px;
+
+    .feed .postContainer , .wishlistFeed .postContainer{
+        width: 140px;
     }
 
-    .feed .postContainer .innerCont img{
-        height: 120px;
-        width: 120px;
+    .feed .postContainer .innerCont img , .wishlistFeed .postContainer .innerCont img {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+
+
+@keyframes slideInSideBar {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
