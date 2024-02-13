@@ -68,8 +68,14 @@ section .container button{
 
 
 /* Mobile Sized Media Query */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     section .container{
         width: 85%;
+    }
+}
+
+@media (max-width: 1055px) {
+    section .container div input {
+        margin: 15px 0px;
     }
 }
