@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import connectDB from './config/db.js'
 import {upload} from './utils/uploadImage.js'
 import {verifyToken} from './utils/verifyToken.js'
-import {addPet,getAllPets,getOwnPets,addWishList,getWishListed,getSearched} from './controllers/petPosts.js';
+import {addPet,getAllPets,getOnePet,getOwnPets,addWishList,getWishListed,getSearched,deletePost} from './controllers/petPosts.js';
 import {registerUser,loginUser} from './controllers/userController.js';
 
 
@@ -51,12 +51,14 @@ app.get("/",(req,res)=>{
 app.post("/addPet/:uid",verifyToken,upload.single("file"),addPet);
 
 app.post("/addWish/:uid/:pid",verifyToken,addWishList);
+app.post("/deletePost/:uid/:pid",verifyToken,deletePost);
 
 app.get("/wishlisted/:uid",verifyToken,getWishListed);
 
 app.get("/pets/:uid",verifyToken,getOwnPets);
 
 app.get("/allPets",getAllPets);
+app.get("/onePet/:pid/:uid",getOnePet);
 
 
 app.get("/search/:name",verifyToken,getSearched);

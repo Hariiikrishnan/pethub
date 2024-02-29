@@ -13,7 +13,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 const registerUser = asyncHandler(async(req,res)=>{
     User.register(
-        { u_id: uuidv4(), username: req.body.username},
+        { u_id: uuidv4(), username: req.body.username },
         req.body.password,
         function (err, user) {
           if (err) {
@@ -53,10 +53,14 @@ const loginUser = asyncHandler(async(req,res)=>{
             jwt.sign({ user }, process.env.SECRETKEY, (err, token) => {
                 // console.log(token);
                 User.findOne({ username: username }).then((result)=>{
-                   
-                        res.json({ token: token, user: result });
+                    if(result.isAdmin){
+                      res.json({ token: token, user: result ,isAdmin:result.isAdmin});
+                      console.log("isAdmin")
+                    }else{
+                      res.json({ token: token, user: result,isAdmin:false });
+                    }
                         // console.log(result);
-                        console.log("Here >>>")
+                        // console.log("Here >>>")
                     
             });
 

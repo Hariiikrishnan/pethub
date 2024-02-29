@@ -100,8 +100,29 @@ const getWishListed = asyncHandler(async (req, res) => {
     } catch (error) {
         console.log("Error:", error.message);
     }
-})
+});
 
+const getOnePet = asyncHandler(async(req,res)=>{
+console.log(req.params.pid);
+
+Pet.find({p_id:req.params.pid}).then((result)=>{
+    User.find({u_id:req.params.uid , 
+        wishListed:{
+            $in:[req.params.pid]
+        }
+    }).then((resultUser)=>{
+        console.log(resultUser);
+        if(resultUser.length!==0){
+            res.json({pet:result[0],saved:true});
+
+        }else{
+
+            res.json({pet:result[0],saved:false});
+        }
+    });
+    // console.log(result);
+})
+});
 
 const addWishList = asyncHandler(async(req,res)=>{
     console.log(req.params.pid);
@@ -112,12 +133,24 @@ const addWishList = asyncHandler(async(req,res)=>{
                 wishListed:req.params.pid
             }
         },
-        { new: true, useFindAndModify: false }).then((res)=>{
-            console.log(res)
+        { new: true, useFindAndModify: false }).then((result)=>{
+            console.log(result);
+            res.json({msg:"Success"});
         }).catch((err)=>{
-            console.log(err)
+            console.log(err);
         })
+});
+
+const deletePost = asyncHandler(async(req,res)=>{
+    Pet.deleteOne({p_id:req.params.pid}).then((result)=>{
+        console.log(result.deletedCount);
+        if(result.deletedCount===1){
+            res.json({msg:"Deleted"});
+        }else{
+            res.status(400);
+        }
+    })
 })
 
 
-export { addPet, getAllPets , getOwnPets , getSearched , addWishList , getWishListed};
+export { addPet, getAllPets,getOnePet , getOwnPets , getSearched , addWishList , getWishListed,deletePost};

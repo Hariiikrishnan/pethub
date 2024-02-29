@@ -11,6 +11,7 @@ const userschema = new mongoose.Schema({
   u_id: String,
   username: String,
   password: String,
+  isAdmin:Boolean,
   wishListed:Array
 });
 userschema.plugin(passportlocalmongoose);
