@@ -1,0 +1,85 @@
+
+
+.parent img{
+    height: 400px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.parent .singlePet{
+    position: relative;
+    height: 85vh;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    background: #d0d0d0;
+    padding: 15px;
+    /* border: solid red 2px; */
+    /* margin:10px 0; */
+}
+.parent .singlePet img{
+    border-radius: 15px;
+}
+.parent .postContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 20px ; */
+}
+
+.parent .postContainer button{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-color: white;
+    padding: 10px 20px;
+    border: none;
+    border-right: solid red 2px;
+    border-bottom: solid red 2px;
+    /* border: solid yellow 2px; */
+    font-size: 30px;
+}
+.parent .postContainer button:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.parent .postContainer button span{
+    font-size: 30px;
+}
+.parent .postContainer .back{
+    right: 20px;
+    bottom: 10px;
+    /* width: 50px; */
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: solid black 2px;
+}
+
+.parent .postContainer .save.saved{
+    background-color: red;
+    color: white;
+}
+
+.parent .postContainer .delete{
+    background-color: red;
+    color: white;
+}
+.parent .postContainer .delete:hover{
+    opacity: 0.5;
+    transition: all 0.2s ease-in-out;
+}
+
+.parent .postContainer h1{
+    font-size: 35px;
+    margin: 5px 0;
+}
+.parent .postContainer h3{
+    margin: 5px 0;
+    font-size: 25px;
+}
+.parent .singleparent{
+    padding: 10px 20px;
+}

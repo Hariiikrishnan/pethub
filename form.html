@@ -87,16 +87,44 @@
                     </label>
                     <input class="inputGet" type="" placeholder=""/>
                 </div>
-                    <div>
-                        <label>
-                            Contact Number
-                        </label>
-                        <input class="inputGet" placeholder=""/>
+                <div>
+                    <label>
+                        Contact Number
+                    </label>
+                    <input class="inputGet" placeholder=""/>
+                </div>
+                <div>
+                    <label>Pet Photo</label>
+                    <input class="inputGet" type="file" placeholder=""/>
+                </div>
+                <div>
+                    <label>
+                        Breed Name
+                    </label>
+                    <input class="inputGet" type="" placeholder=""/>
+                </div>
+                <div>
+                    <label>
+                        Pet's Age
+                    </label>
+                    <input class="inputGet" type="" placeholder=""/>
+                </div>
+                <div style="width: 350px;">
+                    <label>
+                        Is Vaccinated ?
+                    </label>
+                    <div style="flex-direction: row; justify-content: center; align-items: center;">
+
+                        <input style="width: 20px;" class="inputGet" type="checkbox" value="Yes" placeholder="Yes"/>
+                        <label for="Yes">Yes</label>
                     </div>
-                    <div>
-                        <label>Pet Photo</label>
-                        <input class="inputGet" type="file" placeholder=""/>
+                    <div style="flex-direction: row; justify-content: center; align-items: center;">
+
+                        <input style="width: 20px;" class="inputGet" type="checkbox" value="No" placeholder="No"/>
+                        <label for="No">No</label>
                     </div>
+                </div>
+                   
                 
                 </form>
                 <button onclick="handlePost()" class="formBtn">Add</button>

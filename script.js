@@ -8,6 +8,7 @@ itag.classList.add("fa-spin")
 var username = localStorage.getItem("username")
 var token = localStorage.getItem("token")
 var uid = localStorage.getItem("uid")
+var isAdmin = localStorage.getItem("isAdmin");
 
 console.log(username);
 console.log(token);
@@ -74,7 +75,11 @@ function handlePost(){
     var amount = document.getElementsByClassName("inputGet")[3].value;
     var phNo = document.getElementsByClassName("inputGet")[4].value;
     var petImg = document.getElementsByClassName("inputGet")[5].files[0];
-    // console.log(petImg);
+    var breedName = document.getElementsByClassName("inputGet")[6].value;
+    var petAge = document.getElementsByClassName("inputGet")[7].value;
+    var isYes = document.getElementsByClassName("inputGet")[8].checked;
+    var isNo = document.getElementsByClassName("inputGet")[9].checked;
+    console.log(isYes);
 
     var formData = new FormData();
     
@@ -84,6 +89,10 @@ function handlePost(){
     formData.append("address",address);
     formData.append("amount",amount);
     formData.append("phNo",phNo);
+    formData.append("breedName",breedName);
+    formData.append("petAge",petAge);
+    formData.append("isYes",isYes);
+    formData.append("isNo",isNo);
     
     
     axios.post(`http://localhost:3001/addPet/${uid}`,formData,config).then((res)=>{
@@ -216,7 +225,7 @@ function wishListApi(){
         }
     }).catch((err)=>{
         console.log(err);
-    })
+    });
 }
 
 
@@ -235,19 +244,26 @@ function createPostDom(pet){
         
         var button = document.createElement("button");
   
-        button.innerHTML = '<span class="material-symbols-outlined"> favorite</span>';
+        // button.innerHTML = '<span class="material-symbols-outlined"> favorite</span>';
+        button.innerHTML = 'Know More';
+        button.onclick = function handlePet(){
+
+        }
 
         // button.innerHTML = '<i class="fa-regular fa-heart"></i>';
 
 
         let pid = pet.p_id;
         button.addEventListener("click",()=>{
-            addWishList(pid);
+            // addWishList(pid);
+            console.log(pid);
+            localStorage.setItem("currentPet",pid);
+            window.location.href="singlePet.html";
         })
         
         innerContainer.classList.add("innerCont");
         innerContainer.appendChild(petImg);
-        innerContainer.appendChild(button);
+        // innerContainer.appendChild(button);
 
 
         var petName = document.createElement('h3');
@@ -255,22 +271,23 @@ function createPostDom(pet){
         var petNameNode = document.createTextNode(nameString);
         var petAmount = document.createElement('h4');
         var amountNode = document.createTextNode("Rs."  + pet.amount);
-        var phNo = document.createElement('p');
-        var phNoNode = document.createTextNode(pet.phNo);
-        var address = document.createElement('p');
-        let addressString = pet.address.charAt().toUpperCase()+pet.address.slice(1);
-        var addressNode = document.createTextNode(addressString);
+        // var phNo = document.createElement('p');
+        // var phNoNode = document.createTextNode(pet.phNo);
+        // var address = document.createElement('p');
+        // let addressString = pet.address.charAt().toUpperCase()+pet.address.slice(1);
+        // var addressNode = document.createTextNode(addressString);
         
         petName.appendChild(petNameNode);
         petAmount.appendChild(amountNode);
-        address.appendChild(addressNode);
-        phNo.appendChild(phNoNode);
+        // address.appendChild(addressNode);
+        // phNo.appendChild(phNoNode);
 
         container.appendChild(innerContainer);
         container.appendChild(petName);
         container.appendChild(petAmount);
-        container.appendChild(address);
-        container.appendChild(phNo);
+        container.appendChild(button);
+        // container.appendChild(address);
+        // container.appendChild(phNo);
         // console.log()
         return container;
     // }
@@ -341,12 +358,20 @@ function loginApi(username,password,formBtn){
 
             // userCred=res.data.user;
 // console.log(res.data.token)
-            localStorage.setItem("username", res.data.user.username);
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("uid", res.data.user.u_id);
 
+localStorage.setItem("username", res.data.user.username);
+localStorage.setItem("token", res.data.token);
+localStorage.setItem("uid", res.data.user.u_id);
           
-            window.location.href="./index.html"
+            
+            if(res.data.isAdmin){
+                window.location.href="./admin.html";
+                localStorage.setItem("isAdmin", res.data.isAdmin);
+            }else{
+                window.location.href="./index.html";
+                localStorage.setItem("isAdmin", false);
+
+            }
         }
     }).catch((err)=>{
         console.log(err.response.status);

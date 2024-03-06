@@ -4,12 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetHub</title>
+
+    
+    <link rel="stylesheet" href="styles/globalStyle.css">
+    <link rel="stylesheet" href="styles/singlePet.css">
+
+
+    <!-- Goolge Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="favicon/favicon-16x16.png" sizes="16x16" />
+
+
 </head>
 <body>
     
 
-    <section>
-        
+
+    <nav>
+        <h3>PetHub</h3>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="wishList.html">Wishlist</a></li>
+
+            <li><a href="account.html">Account</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><!-- <a>Home</a> --></li>
+        </ul>
+
+
+        <div class="sidebar">
+            <button onclick="handleSideBar()">
+                &#9776
+            </button>
+        </div>
+        <div class="sidebarMenu">
+            <button onclick="closeSideBar()">X</button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wishList.html">Wishlist</a></li>
+
+                <li><a href="account.html">Account</a></li>
+
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><!-- <a>Home</a> --></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <section class="parent">
+        <div>
+            <!-- <img class="petImg" />
+
+            <h1 class="petName">Pongo</h1>
+            <h1 class="amount">Rs.393327</h1>
+            <h2 class="holderName">Akash</h2>
+            <h2 class="address">Salem</h2> -->
+
+            <!-- <button><span class="material-symbols-outlined"> favorite</span></button> -->
+        </div>
     </section>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+
+
+<script>
+
+    
+var username = localStorage.getItem("username")
+var token = localStorage.getItem("token")
+var uid = localStorage.getItem("uid")
+var isAdmin = localStorage.getItem("isAdmin")
+
+console.log(localStorage.getItem("isAdmin"));
+
+const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  };
+
+console.log(localStorage.getItem("currentPet"));
+// createPostDom(localStorage.getItem("cur"))
+
+var pid= localStorage.getItem("currentPet");
+getPet();
+function getPet(){
+    
+    axios.get("http://localhost:3001/onePet/"+pid+"/"+uid).then((res)=>{
+
+    // console.log(res.data.results);
+    if(res.data.length!=0){
+        // loadPetPots(res.data.results,"feed");
+        console.log(res.data.pet);
+        console.log(res.data.saved);
+        loadPet(res.data.pet,res.data.saved);
+       
+    }
+    else{
+        loadNothing("feed", "No Posts Found. Kindly Add Some Posts");
+    }
+    // console.log("here");
+    })
+    
+}
+
+function loadPet(pet,isSaved){
+   var child =  createDom(pet,isSaved);
+   var parent = document.getElementsByClassName("parent")[0];
+   parent.appendChild(child);
+}
+
+
+function createDom(pet,isSaved){
+    
+    // for(i=0;i<pets.length;i++){
+        var container = document.createElement("div");
+        container.classList.add("postContainer");
+        // console.log(pet)
+        var innerContainer = document.createElement("div");
+        
+        var petImg = document.createElement('img');
+        petImg.src = pet.imgUrl;
+        
+        
+        
+        var button = document.createElement("button");
+        var backButton = document.createElement("button");
+        backButton.innerHTML = 'Back';
+        let pid = pet.p_id;
+        console.log(isAdmin===true || isAdmin==="true")
+        if(isAdmin===true || isAdmin==="true"){
+            button.innerHTML = 'Delete';
+            button.classList.add("delete");
+            
+                button.addEventListener("click",()=>{
+                        deletePost(pid);
+                })
+
+        }else{
+            button.innerHTML = '<span class="material-symbols-outlined"> favorite</span>';
+            button.classList.add("save");
+            
+                    button.addEventListener("click",()=>{
+                        addWishList(pid);
+                        // console.log(pid);
+                        // localStorage.setItem("currentPet",pid);
+                        // window.location.href="singlePet.html";
+                    })
+        }
+        if(isSaved){
+            
+            button.classList.add("saved");
+        }
+        backButton.classList.add("back");
+
+        // button.innerHTML = '<i class="fa-regular fa-heart"></i>';
+
+        backButton.addEventListener("click",()=>{
+            // addWishList(pid);
+            // console.log(pid);
+            // localStorage.setItem("currentPet",pid);
+            window.location.href="index.html";
+        })
+        
+        innerContainer.classList.add("singlePet");
+        innerContainer.appendChild(petImg);
+        innerContainer.appendChild(button);
+
+        var singleparent = document.createElement("div");
+        singleparent.classList.add("singleparent");
+
+        var petName = document.createElement('h1');
+        let nameString ="Pet Name : " + pet.petName.charAt().toUpperCase()+pet.petName.slice(1);
+        var petNameNode = document.createTextNode(nameString);
+        var petAmount = document.createElement('h1');
+        var amountNode =  document.createTextNode("Amount : Rs. "  + pet.amount);
+        var phNo = document.createElement('h3');
+        var phNoNode = document.createTextNode("Phone No. : " + pet.phNo);
+        var address = document.createElement('h3');
+        let addressString ="Address : "  + pet.address.charAt().toUpperCase()+pet.address.slice(1);
+        var addressNode = document.createTextNode(addressString);
+        var breedName = document.createElement('h3');
+        // breedName.innerHTML="Pet Age :" + pet.breedName;
+        var breedNameNode = document.createTextNode("Breed Name : " + pet.breedName);
+        var petAge = document.createElement('h3');
+        var petAgeNode = document.createTextNode("Pet Age : " + pet.petAge);
+        var isVaccinated = document.createElement('h3');
+        var isVaccinatedNode = document.createTextNode("Is Vaccinated ? " + pet.isVaccinated);
+        
+        petName.appendChild(petNameNode);
+        petAmount.appendChild(amountNode);
+        address.appendChild(addressNode);
+        phNo.appendChild(phNoNode);
+        // console.log(breedNameNode)
+        // console.log(breedName);
+        breedName.appendChild(breedNameNode);
+        petAge.appendChild(petAgeNode);
+        isVaccinated.appendChild(isVaccinatedNode);
+
+        container.appendChild(innerContainer);
+        singleparent.appendChild(petName);
+        singleparent.appendChild(petAmount);
+        // container.appendChild(button);
+        singleparent.appendChild(address);
+        singleparent.appendChild(phNo);
+        // console.log(breedName);
+        singleparent.appendChild(breedName);
+        console.log(container);
+        singleparent.appendChild(petAge);
+        singleparent.appendChild(isVaccinated);
+        container.appendChild(singleparent);
+        container.appendChild(backButton);
+        // console.log()
+        // singleparent.appendChild(container);
+        return container;
+    // }
+}
+
+function checkPostIsSaved(pet){
+    if(token!=null){
+        axios.post(`http://localhost:3001/addWish/${uid}/${pid}`,config,{
+
+        }).then((res)=>{
+            console.log(res);
+            if(res.data.msg==="Success"){
+                console.log("Added");
+                var saveBtn = document.getElementsByClassName("save")[0];
+                saveBtn.classList.add("saved");
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }else{
+        window.location.href="./login.html"
+    }
+}
+
+function addWishList(pid){
+    console.log(pid);
+
+    if(token!=null){
+        axios.post(`http://localhost:3001/addWish/${uid}/${pid}`,config,{
+
+        }).then((res)=>{
+            console.log(res);
+            if(res.data.msg==="Success"){
+                console.log("Added");
+                var saveBtn = document.getElementsByClassName("save")[0];
+                saveBtn.classList.add("saved");
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }else{
+        window.location.href="./login.html"
+    }
+}
+function deletePost(pid){
+    console.log(pid);
+
+    if(token!=null && isAdmin){
+        axios.post(`http://localhost:3001/deletePost/${uid}/${pid}`,config,{
+
+        }).then((res)=>{
+            console.log(res);
+            if(res.data.msg==="Deleted"){
+                var deleteBtn = document.getElementsByClassName("delete")[0];
+                deleteBtn.innerHTML="Done";
+                
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }else{
+        window.location.href="./login.html"
+    }
+}
+
+</script>
 </html>
