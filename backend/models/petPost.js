@@ -9,6 +9,9 @@ const petSchema = new mongoose.Schema({
     address:String,
     amount:Number,
     phNo:Number,
+    breedName:String,
+    petAge:String,
+    isVaccinated:Boolean,
     imgUrl:String,
   });
 

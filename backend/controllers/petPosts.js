@@ -16,6 +16,7 @@ const addPet = asyncHandler(async (req, res) => {
     console.log(req.body);
 
 
+
     var locaFilePath = req.file.path
     var result = await uploadToCloudinary(locaFilePath)
 
@@ -24,6 +25,12 @@ const addPet = asyncHandler(async (req, res) => {
     // console.log(result.url);
 
     // console.log(req.params.uid);
+    var isVaccinated;
+    if(req.body.isYes === "true"){
+        isVaccinated = true;
+    }else if(req.body.isNo === "true"){
+        isVaccinated = false;
+    }
 
     const pet = new Pet({
         u_id: req.params.uid,
@@ -33,9 +40,13 @@ const addPet = asyncHandler(async (req, res) => {
         address: req.body.address,
         amount: req.body.amount,
         phNo: req.body.phNo,
+        breedName:req.body.breedName,
+        petAge:req.body.petAge,
+        isVaccinated:isVaccinated,
         imgUrl: result.url,
     })
 
+    console.log(pet);
 
     pet.save().then((result) => {
         // console.log(result);
