@@ -210,7 +210,13 @@ function createDom(pet,isSaved){
         var petAge = document.createElement('h3');
         var petAgeNode = document.createTextNode("Pet Age : " + pet.petAge);
         var isVaccinated = document.createElement('h3');
-        var isVaccinatedNode = document.createTextNode("Is Vaccinated ? " + pet.isVaccinated);
+        var vaccination;
+        if(pet.isVaccinated === true){
+            vaccination = "Yes";
+        }else if(pet.isVaccinated === false){
+            vaccination = "No";
+        }
+        var isVaccinatedNode = document.createTextNode("Is Vaccinated ? " + vaccination);
         
         petName.appendChild(petNameNode);
         petAmount.appendChild(amountNode);
